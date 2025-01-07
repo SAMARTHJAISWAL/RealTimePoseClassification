@@ -55,49 +55,43 @@ def classifyPose(landmarks, output_image, display=False):
                                       landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value],
                                       landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value])
 
-    # Get the angle between right shoulder, elbow & wrist points.
+    # angle between right shoulder, elbow & wrist
     right_elbow_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value],
                                        landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value],
                                        landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value])
 
-    # Get the angle between left elbow, shoulder & hip points.
+    # angle between left elbow, shoulder & hip
     left_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value],
                                          landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value],
                                          landmarks[mp_pose.PoseLandmark.LEFT_HIP.value])
 
-    # Get the angle between right hip, shoulder & elbow points.
+    # angle between right hip, shoulder & elbow
     right_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],
                                           landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value],
                                           landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value])
 
-    # Get the angle between left hip, knee & ankle points.
+    # angle between left hip, knee & ankle
     left_knee_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_HIP.value],
                                      landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value],
                                      landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value])
 
-    # Get the angle between right hip, knee & ankle points
+    # angle between right hip, knee & ankle
     right_knee_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],
                                       landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value],
                                       landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value])
 
-    # ----------------------------------------------------------------------------------------------------------------
-
-    # Check if it is the warrior II pose or the T pose.
-    # As for both of them, both arms should be straight and shoulders should be at the specific angle.
-    # ----------------------------------------------------------------------------------------------------------------
-
-    # if both arms are straight.
+    # if both arms are straight
     if left_elbow_angle > 165 and left_elbow_angle < 195 and right_elbow_angle > 165 and right_elbow_angle < 195:
 
-        # if shoulders are at the required angle.
+        # if shoulders are at the required angle
         if left_shoulder_angle > 80 and left_shoulder_angle < 110 and right_shoulder_angle > 80 and right_shoulder_angle < 110:
 
-            # if it is the warrior II pose.
+            # if warrior II pose
 
-            # if one leg is straight.
+            # if one leg is straight
             if left_knee_angle > 165 and left_knee_angle < 195 or right_knee_angle > 165 and right_knee_angle < 195:
 
-                # if the other leg is bended at the required angle.
+                # if other leg is bended at the required angle
                 if left_knee_angle > 90 and left_knee_angle < 120 or right_knee_angle > 90 and right_knee_angle < 120:
                     # Warrior II pose
                     label = 'Warrior II Pose'
@@ -112,7 +106,7 @@ def classifyPose(landmarks, output_image, display=False):
     # if one leg is straight
     if left_knee_angle > 165 and left_knee_angle < 195 or right_knee_angle > 165 and right_knee_angle < 195:
 
-        # if the other leg is bended at the required angle
+        # if other leg is bended at the required angle
         if left_knee_angle > 315 and left_knee_angle < 335 or right_knee_angle > 25 and right_knee_angle < 45:
             # tree pose
             label = 'Tree Pose'
